@@ -65,19 +65,19 @@ breadthFirstSearch(startNode) { //validamos si existe el nodo inicial, si es asi
     return result;
 }
 
-dijkstra(startNode) {
+dijkstra(startNode) { //obtenemos la tabla como array y empezamos las preparaciones para dikjstra
     const nodes = Array.from(this.adjacencyList.keys());
     const numNodes = nodes.length;
 
-    const distances = new Array(numNodes).fill(Infinity);
-    const previousNodes = new Array(numNodes).fill(null);
-    const pq = new Array(numNodes).fill(Infinity);
+    const distances = new Array(numNodes).fill(Infinity);//distancia se declara como infinito
+    const previousNodes = new Array(numNodes).fill(null);//los nodos previos se declaran como null
+    const pq = new Array(numNodes).fill(Infinity);//las futuras nodos comunicativos se declaran vacios
 
-    const startIndex = nodes.indexOf(startNode);
+    const startIndex = nodes.indexOf(startNode);//obtenemos el indice del nodo
     distances[startIndex] = 0;
-    pq[startIndex] = 0;
+    pq[startIndex] = 0;//y solo se marca(para que no sea infinito)
 
-    while (pq.some(dist => dist !== Infinity)) {
+    while (pq.some(dist => dist !== Infinity)) {//cuando se encuentre con un 0 osease diferente de infinito, empieza a iterar buscando por el indice los nodos buscando quien es el menor.
         let minIndex = -1;
         for (let i = 0; i < numNodes; i++) {
             if (pq[i] !== Infinity && (minIndex === -1 || pq[i] < pq[minIndex])) {
@@ -85,25 +85,25 @@ dijkstra(startNode) {
             }
         }
 
-        const currentNode = nodes[minIndex];
+        const currentNode = nodes[minIndex];//guarda el nodo minimo y borra el nodo inicial.
         pq[minIndex] = Infinity;
 
         const currentDistance = distances[minIndex];
-        const neighbors = this.adjacencyList.get(currentNode);
+        const neighbors = this.adjacencyList.get(currentNode);//guarda el valor minimo mientras llama a los vecinos
 
-        neighbors.forEach(({ node, weight }) => {
-            const neighborIndex = nodes.indexOf(node);
+        neighbors.forEach(({ node, weight }) => {//estos se iteran 
+            const neighborIndex = nodes.indexOf(node);//saca el nodo vecino con su peso para poderlo sumar con el peso minimo que se hayo.
             const distance = currentDistance + weight;
 
-            if (distance < distances[neighborIndex]) {
+            if (distance < distances[neighborIndex]) {//de ahi se valida la suma realizada por la distancia del vecino, para verificar que si fue
                 distances[neighborIndex] = distance;
-                previousNodes[neighborIndex] = currentNode;
+                previousNodes[neighborIndex] = currentNode;//actualizamos la distancia por la que encontramos, actualizamos los nodo previo, y recorremos la cola.
                 pq[neighborIndex] = distance;
             }
         });
     }
 
-    return { distances, previousNodes };
+    return { distances, previousNodes };//retorna la distancia minima y sus nodos previos.
 }
 
 getShortestPath(startNode, endNode) {

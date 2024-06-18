@@ -13,7 +13,7 @@ export default class LinkedList {
         this.size = 0;
     }
 
-    // Método para añadir un nuevo nodo al final de la lista
+    // añadir un nuevo nodo al final de la lista
     push(value) {
         const newNode = new Node(value);
         const newLinkedListNode = new LinkedListNode(newNode);
@@ -28,7 +28,7 @@ export default class LinkedList {
         this.size++;
     }
 
-    // Método para obtener el valor en una posición específica
+    //obtener el valor en una posición específica
     get(index) {
         if (index < 0 || index >= this.size) {
             throw new RangeError('Index out of bounds');
@@ -42,17 +42,17 @@ export default class LinkedList {
         return current.node.value;
     }
 
-    // Método para comprobar si la lista está vacía
+    // comprobar si la lista está vacía
     isEmpty() {
         return this.size === 0;
     }
 
-    // Método para obtener el tamaño de la lista
+    // obtener el tamaño de la lista
     getSize() {
         return this.size;
     }
 
-    // Método para recorrer la lista y ejecutar una función en cada nodo
+    // recorrer la lista y ejecutar una función en cada nodo
     forEach(callback) {
         let current = this.head;
         let index = 0;
@@ -64,7 +64,7 @@ export default class LinkedList {
         }
     }
 
-    // Método para encontrar un valor en la lista
+    // encontrar un valor en la lista
     find(value) {
         let current = this.head;
 
@@ -78,7 +78,7 @@ export default class LinkedList {
         return null;
     }
 
-    // Método para convertir la lista en un array
+    // convertir la lista en un array
     toArray() {
         const array = [];
         let current = this.head;
