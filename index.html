@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="src/Controllers/script.mjs"></script>
+    <link rel="stylesheet" href="index.css">
+    <title>Grafos</title>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h1>Estaciones de metro</h1>
+        </div>
+        <div class="main-content">
+            <div class="section" id="agregar-nodo-section">
+                <input type="text" id="agregar nodo" placeholder="Agregar estacion">
+                <button id="agregar-nodo">Agregar</button>
+            </div>
+            <div class="section" id="agregar-arista-section">
+                <input type="text" id="nodo1" placeholder="estacion 1">
+                <input type="text" id="nodo2" placeholder="estacion 2">
+                <input type="text" id="peso" placeholder="distancia">
+                <button id="agregar-arista">Conectar</button>
+            </div>
+            <div class="section" id="recorrido-dfs-section">
+                <input type="text" id="recorrido profundidad" placeholder="estacion para DFS">
+                <button id="profundidad">Recorrer</button>
+            </div>
+            <div class="section" id="recorrido-bfs-section">
+                <input type="text" id="recorrido anchura" placeholder="estacion para BFS">
+                <button id="anchura">Recorrer</button>
+            </div>
+            <div class="section" id="ruta-corta-section">
+                <input type="text" id="dikjstra" placeholder="estacion donde esta">
+                <input type="text" id="nodo-destino" placeholder="donde quiere ir?">
+                <button id="ruta-mas-corta">Ruta Más Corta</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
