@@ -60,25 +60,50 @@ const breadthFirstSearch = () => {
 };
 
 
-const shortestPath = () => {
+const getShortestPath = () => {
     const startNodeInput = document.getElementById('dikjstra');
     const endNodeInput = document.getElementById('nodo-destino');
     const startNode = startNodeInput.value.trim();
     const endNode = endNodeInput.value.trim();
+    
     if (startNode && endNode) {
-        const { path, distance } = graph.getShortestPath(startNode, endNode);
-        alert(`Shortest path from ${startNode} to ${endNode}: ${path}, Distance: ${distance}`);
+        const { distances, previous } = graph.dijkstra(startNode);
+        const path = reconstructPath(startNode, endNode, previous);
+        const distance = distances[endNode];
+        
+        if (path) {
+            alert(`Shortest path from ${startNode} to ${endNode}: ${path.join(" -> ")}, Distance: ${distance}`);
+        } else {
+            alert(`No path found from ${startNode} to ${endNode}`);
+        }
     } else {
         alert("Ingrese nodos de inicio y final válidos.");
     }
+    
     startNodeInput.value = '';
     endNodeInput.value = '';
 };
-
+const reconstructPath = (startNode, endNode, previous) => {
+    const path = [];
+    let currentNode = endNode;
+    
+    while (currentNode !== startNode && currentNode !== null) {
+        path.unshift(currentNode);
+        currentNode = previous[currentNode];
+    }
+    
+    if (currentNode === startNode) {
+        path.unshift(startNode);
+    } else {
+        return null;
+    }
+    
+    return path;
+};
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('agregar-nodo').addEventListener('click', addNode);
     document.getElementById('agregar-arista').addEventListener('click', addEdge);
     document.getElementById('profundidad').addEventListener('click', depthFirstSearch);
     document.getElementById('anchura').addEventListener('click', breadthFirstSearch);
-    document.getElementById('ruta-mas-corta').addEventListener('click', shortestPath);
+    document.getElementById('ruta-mas-corta').addEventListener('click', getShortestPath);
 });
